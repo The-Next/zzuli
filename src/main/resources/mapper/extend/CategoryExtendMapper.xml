@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.zzuli.dao.extend.CategoryExtendMapper">
+
+    <select id="selectAllWithChild" resultMap="CategoryTreeResuleMap">
+        SELECT * FROM jz_category WHERE parent_id is null
+    </select>
+
+    <select id="selectByParentId" resultMap="CategoryTreeResuleMap">
+        SELECT * FROM jz_category WHERE parent_id = #{id}
+    </select>
+
+    <resultMap id="CategoryTreeResuleMap" type="com.edu.zzuli.entity.extend.CategoryExtend" extends="com.edu.zzuli.dao.CategoryMapper.BaseResultMap">
+        <collection property="children" column="id" select="selectByParentId"></collection>
+    </resultMap>
+
+</mapper>
