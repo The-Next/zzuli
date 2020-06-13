@@ -20,7 +20,7 @@ public class Swagger2 {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.jacky.poll.web.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.edu.zzuli.web.controller"))
 				.paths(PathSelectors.any())
 				.build()
 				.securitySchemes(Lists.newArrayList(apiKey()));
@@ -28,7 +28,7 @@ public class Swagger2 {
 	
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				.title("教育评价系统")
+				.title("家政服务预约平台")
 				.description("xxx软件科技有限公司，http://www.xxx.com")
 				.termsOfServiceUrl("http://www.xxx.com")
 				.version("1.0")

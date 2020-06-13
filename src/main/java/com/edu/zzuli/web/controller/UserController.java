@@ -3,6 +3,10 @@ package com.edu.zzuli.web.controller;
 import com.edu.zzuli.entity.User;
 import com.edu.zzuli.entity.extend.UserExtend;
 import com.edu.zzuli.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Api(description = "用户管理接口")
 public class UserController {
     @Resource
     private UserService userService;
@@ -32,6 +37,10 @@ public class UserController {
         return "保存或者更新成功";
     }
 
+    @ApiOperation("通过ID删除用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "唯一编号", required = true, paramType = "query")
+    })
     @GetMapping("deleteById/{id}")
     public String deleteById(@PathVariable("id") long id){
         userService.deleteById(id);

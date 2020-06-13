@@ -1,4 +1,4 @@
-package com.jacky.base.utils;
+package com.edu.zzuli.utils;
 
 import java.util.Date;
 

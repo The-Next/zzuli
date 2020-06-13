@@ -101,7 +101,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edu.zzuli.entity.Order">
+  <insert useGeneratedKeys="true" keyProperty="id" id="insert" parameterType="com.edu.zzuli.entity.Order">
     insert into jz_order (id, order_time, total, 
       status, customer_id, employee_id, 
       address_id)

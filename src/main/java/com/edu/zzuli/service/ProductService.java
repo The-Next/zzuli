@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface ProductService {
     List<Product> findAll();
-    void saveOrUpdate(Product product);
-    void deleteById(long id);
+    void saveOrUpdate(Product product) throws ClassCastException;
+    void deleteById(long id) throws ClassCastException;
     List<ProductExtend> findAllWithCategory();
     Product selectProductById(long id);
 }

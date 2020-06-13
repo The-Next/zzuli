@@ -1,14 +1,11 @@
-package com.jacky.poll.config;
+package com.edu.zzuli.config;
 
+import com.edu.zzuli.utils.CustomerException;
+import com.edu.zzuli.utils.Message;
+import com.edu.zzuli.utils.MessageUtil;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.jacky.base.utils.CustomerException;
-import com.jacky.base.utils.Message;
-import com.jacky.base.utils.MessageUtil;
-import com.jacky.base.utils.PermissionException;
-import com.jacky.base.utils.UnAuthorizedException;
 
 /**
  * @program: app01
@@ -21,18 +18,13 @@ public class CustomerExceptionHandler {
 
     @ExceptionHandler(value =  Exception.class) // 捕获 Controller 中抛出的指定类型的异常，也可以指定其他异常
     public <E> Message handler(Exception exception){
+        // 输出异常信息
         exception.printStackTrace();
+        // 如果是自定义异常，抛出错误信息
         if(exception instanceof CustomerException){
-            if(exception instanceof PermissionException){
-                return MessageUtil.forbidden("权限不足");
-            }
-            if( exception instanceof UnAuthorizedException){
-                return MessageUtil.unAuthorized(exception.getMessage());
-            }
-            
             return MessageUtil.error(exception.getMessage());
         } else if (exception instanceof DataIntegrityViolationException) {
-        	return MessageUtil.error("该数据暂时不允许删除！请先删除与当前数据关联的其他数据");
+        	return MessageUtil.error("数据库错误");
         }
         return MessageUtil.error("后台接口异常！");
     }

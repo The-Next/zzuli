@@ -3,6 +3,10 @@ package com.edu.zzuli.web.controller;
 import com.edu.zzuli.entity.Product;
 import com.edu.zzuli.entity.extend.ProductExtend;
 import com.edu.zzuli.service.ProductService;
+import com.edu.zzuli.utils.Message;
+import com.edu.zzuli.utils.MessageUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -11,14 +15,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@Api(description = "产品管理接口")
 public class ProductController {
 
     @Resource
     private ProductService productService;
 
     @GetMapping("/getProduct")
-    public ArrayList<Product> getAllProduct(){
-        return (ArrayList<Product>) productService.findAll();
+    public Message getAllProduct(){
+        ArrayList<Product> arrayList= (ArrayList<Product>) productService.findAll();
+        return MessageUtil.success(arrayList);
     }
 
     @GetMapping("/getProduct/{id}")
@@ -27,19 +33,22 @@ public class ProductController {
     }
 
     @PostMapping("/saveOrUpdateProuct")
-    public String saveOrUpdateProuct(@RequestBody Product product){
+    public Message saveOrUpdateProuct(@RequestBody Product product){
         productService.saveOrUpdate(product);
-        return "插入或更新成功";
+        return MessageUtil.success("保存成功");
     }
 
+
+    @ApiOperation("通过ID删除产品信息")
     @GetMapping("/deleteProduct/{id}")
-    public String deleteProductById(@PathVariable("id") Long id){
+    public Message deleteProductById(@PathVariable("id") Long id){
         productService.deleteById(id);
-        return "删除成功";
+        return MessageUtil.success("删除失败");
     }
 
     @GetMapping("/findAllWithCategory")
-    public List<ProductExtend> findAllWithCategory(){
-        return productService.findAllWithCategory();
+    public Message findAllWithCategory(){
+        List<ProductExtend> list=productService.findAllWithCategory();
+        return MessageUtil.success(list);
     }
 }

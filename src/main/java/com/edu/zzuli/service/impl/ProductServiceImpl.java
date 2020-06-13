@@ -5,6 +5,7 @@ import com.edu.zzuli.dao.extend.ProductExtendMapper;
 import com.edu.zzuli.entity.Product;
 import com.edu.zzuli.entity.extend.ProductExtend;
 import com.edu.zzuli.service.ProductService;
+import com.edu.zzuli.utils.CustomerException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +39,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(long id) throws ClassCastException{
+        Product product = productMapper.selectByPrimaryKey(id);
+        if (product==null){
+            throw new CustomerException("删除失败，要删除的数据不存在");
+        }else {
+            productMapper.deleteByPrimaryKey(id);
+        }
         productMapper.deleteByPrimaryKey(id);
     }
 
