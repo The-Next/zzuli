@@ -28,8 +28,9 @@ public class ProductController {
     }
 
     @GetMapping("/getProduct/{id}")
-    public Product getProductById(@PathVariable("id") Long id){
-        return productService.selectProductById(id);
+    public Message getProductById(@PathVariable("id") Long id){
+        Product product = productService.selectProductById(id);
+        return MessageUtil.success(product);
     }
 
     @PostMapping("/saveOrUpdateProuct")

@@ -2,7 +2,6 @@ package com.edu.zzuli.dao.extend;
 
 import com.edu.zzuli.entity.OrderLine;
 
-import javax.jnlp.ClipboardService;
 import java.util.List;
 
 /**

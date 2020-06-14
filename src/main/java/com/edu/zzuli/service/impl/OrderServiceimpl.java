@@ -58,7 +58,29 @@ public class OrderServiceimpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
+
         return orderMapper.selectByExample(new OrderExample());
+    }
+
+    @Override
+    public List<Order> findByCustomer(long customerid, String status) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andCustomerIdEqualTo(customerid).andStatusEqualTo(status);
+        return orderMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Order> findByWaiter(long waiterid, String status) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andEmployeeIdEqualTo(waiterid).andStatusEqualTo(status);
+        return orderMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Order> findByAddress(long addressid) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andAddressIdEqualTo(addressid);
+        return orderMapper.selectByExample(example);
     }
 
     @Override

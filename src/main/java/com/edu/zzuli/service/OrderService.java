@@ -20,5 +20,11 @@ public interface OrderService {
 
     List<Order> findAll();
 
+    List<Order> findByCustomer(long customerid,String status);
+
+    List<Order> findByWaiter(long waiterid,String status);
+
+    List<Order> findByAddress(long addressid);
+
     OrderExtend findOrderDetailsById(long id);
 }

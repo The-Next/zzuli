@@ -3,6 +3,8 @@ package com.edu.zzuli.web.controller;
 import com.edu.zzuli.entity.User;
 import com.edu.zzuli.entity.extend.UserExtend;
 import com.edu.zzuli.service.UserService;
+import com.edu.zzuli.utils.Message;
+import com.edu.zzuli.utils.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -26,15 +28,15 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("getUser")
-    public List<User> findAll(){
-        return userService.findAll();
+    public Message findAll(){
+        List<User> list = userService.findAll();
+        return MessageUtil.success(list);
     }
 
     @PostMapping("saveOrUpdate")
-    public String saveOrUpdate(@RequestBody User user){
-        System.out.println(user.getRealname());
+    public Message saveOrUpdate(@RequestBody User user){
         userService.saveOrUpdate(user);
-        return "保存或者更新成功";
+        return MessageUtil.success("保存或者更新成功");
     }
 
     @ApiOperation("通过ID删除用户信息")
@@ -42,9 +44,9 @@ public class UserController {
             @ApiImplicitParam(name = "id", value = "唯一编号", required = true, paramType = "query")
     })
     @GetMapping("deleteById/{id}")
-    public String deleteById(@PathVariable("id") long id){
+    public Message deleteById(@PathVariable("id") long id){
         userService.deleteById(id);
-        return "删除成功";
+        return MessageUtil.success("删除成功");
     }
 
     /**
@@ -52,7 +54,8 @@ public class UserController {
      * @return
      */
     @GetMapping("findAllWithRole")
-    public List<UserExtend> findAllWithRole(){
-        return userService.findAllWithRole();
+    public Message findAllWithRole(){
+        List<UserExtend> list = userService.findAllWithRole();
+        return MessageUtil.success(list);
     }
 }
