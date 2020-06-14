@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/category")
-@Api(description = "")
+@Api(description = "栏目管理接口")
 public class CategoryController {
     @Resource
     private CategoryService categoryService;

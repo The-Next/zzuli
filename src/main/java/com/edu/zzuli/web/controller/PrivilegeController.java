@@ -8,6 +8,7 @@ import com.edu.zzuli.service.CategoryService;
 import com.edu.zzuli.service.PrivilegeService;
 import com.edu.zzuli.utils.Message;
 import com.edu.zzuli.utils.MessageUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/privilege")
+@Api(description = "权限管理接口")
 public class PrivilegeController {
     @Resource
     private PrivilegeService privilegeService;

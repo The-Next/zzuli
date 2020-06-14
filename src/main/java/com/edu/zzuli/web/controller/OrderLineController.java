@@ -4,6 +4,7 @@ import com.edu.zzuli.entity.OrderLine;
 import com.edu.zzuli.service.OrderLineService;
 import com.edu.zzuli.utils.Message;
 import com.edu.zzuli.utils.MessageUtil;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("orderline")
+@Api(description = "订单项接口")
 public class OrderLineController {
     @Resource
     private OrderLineService orderLineService;

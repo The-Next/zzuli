@@ -4,6 +4,7 @@ import com.edu.zzuli.entity.Address;
 import com.edu.zzuli.service.AddressService;
 import com.edu.zzuli.utils.Message;
 import com.edu.zzuli.utils.MessageUtil;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/address")
+@Api(description = "地址管理接口")
 public class AddressController {
     @Resource
     private AddressService addressService;

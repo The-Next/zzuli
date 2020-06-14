@@ -52,6 +52,7 @@
         <result column="address" jdbcType="VARCHAR" property="address"></result>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"></result>
     </association>
-      <collection property="orderLines" column="o_id" select="com.edu.zzuli.dao.extend.OrderLineExtendMapper.selectByOrderId"
+      <collection property="orderLines" column="o_id"
+                  select="com.edu.zzuli.dao.extend.OrderLineExtendMapper.selectByOrderId"></collection>
   </resultMap>
 </mapper>
