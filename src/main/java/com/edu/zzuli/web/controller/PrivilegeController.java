@@ -47,8 +47,8 @@ public class PrivilegeController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "唯一编号", required = true, paramType = "query")
     })
-    @GetMapping("/deleteById/{id}")
-    public Message deleteById(@PathVariable("id") long id){
+    @GetMapping("/deleteById")
+    public Message deleteById(long id){
         privilegeService.deleteById(id);
         return MessageUtil.success("删除成功");
     }

@@ -45,4 +45,9 @@ public class UserServiceimpl implements UserService {
     public List<UserExtend> findAllWithRole() {
         return userExtendMapper.selectAllWithRole();
     }
+
+    @Override
+    public User selectUserById(Long id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
 }

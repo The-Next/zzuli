@@ -25,13 +25,13 @@ import java.util.List;
 public class OrderLineController {
     @Resource
     private OrderLineService orderLineService;
-    @GetMapping("/getOrderLineByOrder/{id}")
-    private Message getOrderLineByOrder(@PathVariable("id") long id){
+    @GetMapping("/getOrderLineByOrder")
+    private Message getOrderLineByOrder(long id){
         List<OrderLine> lines = orderLineService.findByOrderId(id);
         return MessageUtil.success(lines);
     }
-    @GetMapping("/getOrderLineByProduct/{id}")
-    private Message getOrderLineByProduct(@PathVariable("id") long id){
+    @GetMapping("/getOrderLineByProduct")
+    private Message getOrderLineByProduct(long id){
         List<OrderLine> lines = orderLineService.findByProductId(id);
         return MessageUtil.success(lines);
     }

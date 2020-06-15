@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/category")
-@Api(description = "栏目管理接口")
+@Api(description = "类别管理接口")
 public class CategoryController {
     @Resource
     private CategoryService categoryService;
@@ -43,8 +43,8 @@ public class CategoryController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "唯一编号", required = true, paramType = "query")
     })
-    @GetMapping("/deleteById/{id}")
-    public Message deleteById(@PathVariable("id") long id){
+    @GetMapping("/deleteById")
+    public Message deleteById(long id){
         categoryService.deleteById(id);
         return MessageUtil.success("删除成功");
     }

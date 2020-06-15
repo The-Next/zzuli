@@ -29,14 +29,14 @@ public class AddressController {
         return MessageUtil.success("保存或更改成功");
     }
 
-    @GetMapping("/deleteById/{id}")
-    public Message deleteById(@PathVariable("id") long id){
+    @GetMapping("/deleteById")
+    public Message deleteById(long id){
         addressService.deleteById(id);
         return MessageUtil.success("删除成功");
     }
 
-    @GetMapping("/findAllWithUserId/{id}")
-    public Message findAllWithUserId(@PathVariable("id") long id){
+    @GetMapping("/findAllWithUserId")
+    public Message findAllWithUserId(long id){
         List<Address> addresses = addressService.findAllWithUserId(id);
         return MessageUtil.success(addresses);
     }

@@ -31,7 +31,7 @@ public class AccountCustomerController {
     }
 
     @ApiOperation("通过ID删除信息")
-    @GetMapping("/deleteById/{id}")
+    @GetMapping("/deleteById")
     public Message deleteById(long id){
         accountCustomerService.deleteById(id);
         return MessageUtil.success("删除成功");

@@ -30,7 +30,7 @@ public class AccountSystemController {
         return MessageUtil.success(list);
     }
     @ApiOperation("通过ID删除信息")
-    @GetMapping("/deleteById/{id}")
+    @GetMapping("/deleteById")
     public Message deleteById(long id){
         accountSystemService.deleteById(id);
         return MessageUtil.success("删除成功");

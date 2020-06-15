@@ -33,7 +33,7 @@ public class CommentController {
         return MessageUtil.success(list);
     }
 
-    @GetMapping("/deleteById/{id}")
+    @GetMapping("/deleteById")
     public Message deleteById(long id){
         commentService.deleteById(id);
         return MessageUtil.success("删除成功");

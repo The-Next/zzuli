@@ -35,8 +35,8 @@ public class OrderController {
         return MessageUtil.success("success",orderService.findAll());
     }
 
-    @GetMapping("findById/{id}")
-    public Message findById(@PathVariable("id") long id){
+    @GetMapping("findById")
+    public Message findById(long id){
         return MessageUtil.success("success",orderService.findOrderDetailsById(id));
     }
 

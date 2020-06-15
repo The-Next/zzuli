@@ -27,8 +27,8 @@ public class ProductController {
         return MessageUtil.success(arrayList);
     }
 
-    @GetMapping("/getProduct/{id}")
-    public Message getProductById(@PathVariable("id") Long id){
+    @GetMapping("/getProductById")
+    public Message getProductById(Long id){
         Product product = productService.selectProductById(id);
         return MessageUtil.success(product);
     }
@@ -41,10 +41,10 @@ public class ProductController {
 
 
     @ApiOperation("通过ID删除产品信息")
-    @GetMapping("/deleteProduct/{id}")
-    public Message deleteProductById(@PathVariable("id") Long id){
+    @GetMapping("/deleteProduct")
+    public Message deleteProductById( Long id){
         productService.deleteById(id);
-        return MessageUtil.success("删除失败");
+        return MessageUtil.success("删除成功");
     }
 
     @GetMapping("/findAllWithCategory")

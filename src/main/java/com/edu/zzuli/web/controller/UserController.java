@@ -1,5 +1,6 @@
 package com.edu.zzuli.web.controller;
 
+import com.edu.zzuli.entity.Product;
 import com.edu.zzuli.entity.User;
 import com.edu.zzuli.entity.extend.UserExtend;
 import com.edu.zzuli.service.UserService;
@@ -43,8 +44,8 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "唯一编号", required = true, paramType = "query")
     })
-    @GetMapping("deleteById/{id}")
-    public Message deleteById(@PathVariable("id") long id){
+    @GetMapping("deleteById")
+    public Message deleteById(long id){
         userService.deleteById(id);
         return MessageUtil.success("删除成功");
     }
@@ -57,5 +58,11 @@ public class UserController {
     public Message findAllWithRole(){
         List<UserExtend> list = userService.findAllWithRole();
         return MessageUtil.success(list);
+    }
+
+    @GetMapping("/getUserId")
+    public Message getUserById(Long id){
+        User user = userService.selectUserById(id);
+        return MessageUtil.success(user);
     }
 }
