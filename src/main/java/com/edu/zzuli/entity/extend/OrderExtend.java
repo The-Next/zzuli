@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class OrderExtend extends Order {
     public static final String STATUS_WFK="未付款";
-    public static final String STATUS_WFH="未发货";
-    public static final String STATUS_DSH="待收货";
+    public static final String STATUS_DPD="待派单";
+    public static final String STATUS_DFW="待服务";
     public static final String STATUS_DQR="待确认";
     public static final String STATUS_YWC="已完成";
 

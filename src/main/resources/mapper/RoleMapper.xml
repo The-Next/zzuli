@@ -161,4 +161,15 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <resultMap id="PrivileInRoleResultMap" type="com.edu.zzuli.entity.Role" extends="com.edu.zzuli.dao.RoleMapper.BaseResultMap">
+    <collection property="privilegeList" resultMap="com.edu.zzuli.dao.PrivileMapper.BaseResultMap"></collection>
+  </resultMap>
+
+  <select id="findRoleWithPrivile" parameterType="java.lang.Long" resultMap="PrivileInRoleResultMap">
+    SELECT * FROM base_privilege p ,base_role r ,base_role_privilege pr
+    WHERE p.id = pr.privilege_id
+    AND r.id = pr.role_id
+    AND r.id = #{id}
+  </select>
 </mapper>

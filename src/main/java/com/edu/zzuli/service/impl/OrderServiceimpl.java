@@ -2,10 +2,12 @@ package com.edu.zzuli.service.impl;
 
 import com.edu.zzuli.dao.OrderLineMapper;
 import com.edu.zzuli.dao.OrderMapper;
+import com.edu.zzuli.dao.UserMapper;
 import com.edu.zzuli.dao.extend.OrderExtendMapper;
 import com.edu.zzuli.entity.Order;
 import com.edu.zzuli.entity.OrderExample;
 import com.edu.zzuli.entity.OrderLine;
+import com.edu.zzuli.entity.User;
 import com.edu.zzuli.entity.extend.OrderExtend;
 import com.edu.zzuli.service.OrderService;
 import com.edu.zzuli.utils.CustomerException;
@@ -30,6 +32,8 @@ public class OrderServiceimpl implements OrderService {
     private OrderLineMapper orderLineMapper;
     @Resource
     private OrderExtendMapper orderExtendMapper;
+    @Resource
+    private UserMapper userMapper;
 
     @Override
     public void commit(OrderVM orderVM) throws CustomerException {
@@ -84,7 +88,74 @@ public class OrderServiceimpl implements OrderService {
     }
 
     @Override
+    public List<OrderExtend> query(String status) {
+        return orderExtendMapper.query(null,status);
+    }
+
+    @Override
     public OrderExtend findOrderDetailsById(long id){
-        return orderExtendMapper.selectById(id);
+        List<OrderExtend> list = orderExtendMapper.query(id,null);
+        if(list.size()>0){
+            return list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public void payOrder(long orderId) throws Exception {
+        //支付
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if (order==null){
+            throw new Exception("该订单不存在");
+        }
+        //待派单
+        order.setStatus(OrderExtend.STATUS_DPD);
+        orderMapper.updateByPrimaryKey(order);
+    }
+
+    @Override
+    public void sendOrder(long orderId, long employeeId) throws Exception {
+        //派单
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if (order==null){
+            throw new Exception("订单不存在");
+        }else if (!order.getStatus().equals("待派单")){
+            throw new Exception("订单未支付/订单异常");
+        }
+        User emp = userMapper.selectByPrimaryKey(employeeId);
+        if (emp==null){
+            throw new Exception("该员工不存在");
+        }
+        //进入带服务状态
+        order.setStatus(OrderExtend.STATUS_DFW);
+        orderMapper.updateByPrimaryKey(order);
+    }
+
+    @Override
+    public void rejectOrder(long orderId) throws Exception {
+        //服务结束
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if (order==null){
+            throw new Exception("该订单不存在");
+        }else if (!order.getStatus().equals("待服务")){
+            throw new Exception("订单异常");
+        }
+        //进入待确认
+        order.setStatus(OrderExtend.STATUS_DQR);
+        orderMapper.updateByPrimaryKey(order);
+    }
+
+    @Override
+    public void confirmOrder(long orderId) throws Exception {
+        //用户确认
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if (order==null){
+            throw new Exception("该订单不存在");
+        }else if (!order.getStatus().equals("待确认")){
+            throw new Exception("订单异常");
+        }
+        //已完成
+        order.setStatus(OrderExtend.STATUS_YWC);
+        orderMapper.updateByPrimaryKey(order);
     }
 }

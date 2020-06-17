@@ -6,6 +6,8 @@ import com.edu.zzuli.utils.Message;
 import com.edu.zzuli.utils.MessageUtil;
 import com.edu.zzuli.vm.OrderVM;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,13 @@ public class OrderController {
         orderService.commit(orderVM);
         return MessageUtil.success("提交成功");
     }
+    @GetMapping("query")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "status", value = "订单状态",required = false,paramType = "query")
+    })
+    public Message query(String status){
+        return MessageUtil.success("success",orderService.query(status));
+    }
     @GetMapping("findAll")
     public Message findAll(){
         return MessageUtil.success("success",orderService.findAll());
@@ -40,4 +49,32 @@ public class OrderController {
         return MessageUtil.success("success",orderService.findOrderDetailsById(id));
     }
 
+    @GetMapping("payOrder")
+    @ApiOperation("支付订单")
+    public Message payOrder(long orderId) throws Exception{
+        orderService.payOrder(orderId);
+        return MessageUtil.success("success");
+    }
+
+    @GetMapping("sendOrder")
+    @ApiOperation("派单")
+    public Message sendOrder(long orderId,long employeeId) throws Exception{
+        orderService.sendOrder(orderId,employeeId);
+        return MessageUtil.success("success");
+    }
+
+
+    @GetMapping("rejectOrder")
+    @ApiOperation("服务订单")
+    public Message rejectOrder(long orderId) throws Exception{
+        orderService.rejectOrder(orderId);
+        return MessageUtil.success("success");
+    }
+
+    @GetMapping("confirmOrder")
+    @ApiOperation("确认订单")
+    public Message confirmOrder(long orderId) throws Exception{
+        orderService.confirmOrder(orderId);
+        return MessageUtil.success("success");
+    }
 }

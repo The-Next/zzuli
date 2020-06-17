@@ -2,6 +2,8 @@ package com.edu.zzuli.dao.extend;
 
 import com.edu.zzuli.entity.extend.OrderExtend;
 
+import java.util.List;
+
 /**
  * @ClassName OrderExtendMapper
  * @Description todo
@@ -9,5 +11,5 @@ import com.edu.zzuli.entity.extend.OrderExtend;
  * @Date 2020/06/13 9:57
  */
 public interface OrderExtendMapper {
-    OrderExtend selectById(long id);
+    List<OrderExtend> query(Long id, String status);
 }

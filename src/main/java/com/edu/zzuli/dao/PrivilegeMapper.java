@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PrivilegeMapper {
+    Privilege findPrivileWithRole(long id);
+
     long countByExample(PrivilegeExample example);
 
     int deleteByExample(PrivilegeExample example);

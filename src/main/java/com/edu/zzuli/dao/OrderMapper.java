@@ -3,9 +3,13 @@ package com.edu.zzuli.dao;
 import com.edu.zzuli.entity.Order;
 import com.edu.zzuli.entity.OrderExample;
 import java.util.List;
+
+import com.edu.zzuli.entity.Role;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
+
+
     long countByExample(OrderExample example);
 
     int deleteByExample(OrderExample example);

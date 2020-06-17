@@ -240,4 +240,15 @@
       parent_id = #{parentId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <resultMap id="RoleInPrivileResultMap" type="com.edu.zzuli.entity.Privilege" extends="com.edu.zzuli.dao.PrivilegeMapper.BaseResultMap">
+    <collection property="roleList" resultMap="com.edu.zzuli.dao.RoleMapper.BaseResultMap"></collection>
+  </resultMap>
+
+  <select id="findPrivileWithRole" parameterType="java.lang.Long" resultMap="RoleInPrivileResultMap">
+    SELECT * FROM base_privilege p ,base_role r ,base_role_privilege pr
+    WHERE p.id = pr.privilege_id
+    AND r.id = pr.role_id
+    AND p.id = #{id}
+  </select>
 </mapper>

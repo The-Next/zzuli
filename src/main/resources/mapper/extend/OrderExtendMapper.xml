@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.zzuli.dao.extend.OrderExtendMapper">
-  <select id="selectById" resultMap="orderExtendResultMap">
+  <select id="query" resultMap="orderExtendResultMap">
       SELECT
       o.id as o_id,
       o.order_time,
@@ -29,8 +29,14 @@
       ON o.employee_id = e.id
       LEFT JOIN jz_address a
       ON o.address_id = a.id
-      WHERE
-      o.id = #{id}
+      <where>
+          <if test="status != null">
+              o.status LIKE concat ("%",#{status} ,"%")
+          </if>
+          <if test="id != null">
+              o.id = #{id}
+          </if>
+      </where>
   </select>
 
   <resultMap id="orderExtendResultMap" type="com.edu.zzuli.entity.extend.OrderExtend">
@@ -44,6 +50,10 @@
       <association property="customer" column="customer_id"
                    select="com.edu.zzuli.dao.UserMapper.selectByPrimaryKey">
       </association>
+      <association property="employee"
+                   column="employee_id"
+                   select="com.edu.zzuli.dao.UserMapper.selectByPrimaryKey"
+      />
     <association property="address" javaType="com.edu.zzuli.entity.Address">
         <id column="a_id" jdbcType="BIGINT" property="id"></id>
         <result column="province" jdbcType="VARCHAR" property="province"></result>

@@ -1,5 +1,6 @@
 package com.edu.zzuli.service;
 
+import com.edu.zzuli.entity.Role;
 import com.edu.zzuli.vm.RoleVM;
 
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.List;
  * @Created by cccp
  */
 public interface RoleService {
-    public List<RoleVM> findAll();
-    public RoleVM findById(long id);
+    public List<Role> findAll();
+    public Role findById(long id);
     public void deleteById(long id);
-    public void saveOrUpdate(RoleVM roleVM);
+    public void saveOrUpdate(Role role);
 }

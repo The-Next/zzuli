@@ -12,6 +12,7 @@ import java.util.List;
  * @Created by cccp
  */
 public interface UserService {
+    public List<UserExtend> findAllEmployee();
     List<User> findAll();
 
     void saveOrUpdate(User user);

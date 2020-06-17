@@ -1,11 +1,22 @@
 package com.edu.zzuli.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Role implements Serializable {
     private Long id;
 
     private String name;
+
+    private List<Privilege> privilegeList;
+
+    public List<Privilege> getPrivilegeList() {
+        return privilegeList;
+    }
+
+    public void setPrivilegeList(List<Privilege> privilegeList) {
+        this.privilegeList = privilegeList;
+    }
 
     private static final long serialVersionUID = 1L;
 

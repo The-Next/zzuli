@@ -5,7 +5,10 @@
     <select id="selectAllWithRole" resultMap="UserExtendResultMap">
         SELECT * FROM base_user
     </select>
-
+    <select id="selectAllEmployee" resultMap="UserExtendResultMap">
+        SELECT * FROM base_user
+        WHERE role_id = 3
+    </select>
     <resultMap id="UserExtendResultMap" type="com.edu.zzuli.entity.extend.UserExtend" extends="com.edu.zzuli.dao.UserMapper.BaseResultMap">
         <association property="role" column="role_id" select="com.edu.zzuli.dao.RoleMapper.selectByPrimaryKey"></association>
     </resultMap>

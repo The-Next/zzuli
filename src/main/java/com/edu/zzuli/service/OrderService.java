@@ -26,5 +26,15 @@ public interface OrderService {
 
     List<Order> findByAddress(long addressid);
 
+    List<OrderExtend> query(String status);//根据状态查订单
+
     OrderExtend findOrderDetailsById(long id);
+
+    void payOrder(long orderId) throws Exception;//派单
+
+    void sendOrder(long orderId,long employeeId) throws Exception;//接单
+
+    void rejectOrder(long orderId) throws Exception;//待确认
+
+    void confirmOrder(long orderId) throws Exception;//结束
 }

@@ -11,5 +11,6 @@ import java.util.List;
  * @Created by cccp
  */
 public interface UserExtendMapper {
+    List <UserExtend> selectAllEmployee();
     List<UserExtend> selectAllWithRole();
 }

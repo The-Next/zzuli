@@ -18,4 +18,5 @@ public interface PrivilegeService {
     void saveOrUpdate(Privilege privilege);
     void deleteById(long id);
     List<PrivilegeExtend> findAllWithChild();
+    Privilege findWithRole(long id);
 }

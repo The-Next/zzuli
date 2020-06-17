@@ -45,4 +45,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     public List<PrivilegeExtend> findAllWithChild() {
         return privilegeExtendMapper.selectAllWithChild();
     }
+
+    @Override
+    public Privilege findWithRole(long id) {
+        return privilegeMapper.findPrivileWithRole(id);
+    }
 }

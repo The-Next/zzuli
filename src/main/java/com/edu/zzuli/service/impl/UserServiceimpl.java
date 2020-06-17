@@ -22,6 +22,12 @@ public class UserServiceimpl implements UserService {
     private UserMapper userMapper;
     @Resource
     private UserExtendMapper userExtendMapper;
+
+    @Override
+    public List<UserExtend> findAllEmployee() {
+        return userExtendMapper.selectAllEmployee();
+    }
+
     @Override
     public List<User> findAll() {
         return userMapper.selectByExample(null);

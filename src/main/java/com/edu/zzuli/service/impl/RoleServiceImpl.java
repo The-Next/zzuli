@@ -28,35 +28,37 @@ public class RoleServiceImpl implements RoleService {
     @Resource
     private PrivilegeMapper privilegeMapper;
     @Override
-    public List<RoleVM> findAll() {//查询角色带权限
-        List<RoleVM> roleVMS = new ArrayList<>();
+    public List<Role> findAll() {//查询角色带权限
+//        List<RoleVM> roleVMS = new ArrayList<>();
         List<Role> roleList = roleMapper.selectByExample(null);
         for (Role role:roleList){
-            RolePrivilegeExample rolePrivilegeExample = new RolePrivilegeExample();
-            rolePrivilegeExample.createCriteria().andRoleIdEqualTo(role.getId());
-            List<RolePrivilege> list = rolePrivilegeMapper.selectByExample(rolePrivilegeExample);
-            List<Long> collect = list.stream().map(RolePrivilege::getPrivilegeId).collect(Collectors.toList());
-            PrivilegeExample privilegeExample = new PrivilegeExample();
-            privilegeExample.createCriteria().andIdIn(collect);
-            roleVMS.add(new RoleVM(role,privilegeMapper.selectByExample(privilegeExample)));
+            role = roleMapper.findRoleWithPrivile(role.getId());
+//            RolePrivilegeExample rolePrivilegeExample = new RolePrivilegeExample();
+//            rolePrivilegeExample.createCriteria().andRoleIdEqualTo(role.getId());
+//            List<RolePrivilege> list = rolePrivilegeMapper.selectByExample(rolePrivilegeExample);
+//            List<Long> collect = list.stream().map(RolePrivilege::getPrivilegeId).collect(Collectors.toList());
+//            PrivilegeExample privilegeExample = new PrivilegeExample();
+//            privilegeExample.createCriteria().andIdIn(collect);
+//            roleVMS.add(new RoleVM(role,privilegeMapper.selectByExample(privilegeExample)));
         }
-        return roleVMS;
+        return roleList;
     }
 
     @Override
-    public RoleVM findById(long id) {
-        RoleVM vm = new RoleVM();
-        Role role = roleMapper.selectByPrimaryKey(id);
-        RolePrivilegeExample example = new RolePrivilegeExample();
-        example.createCriteria().andRoleIdEqualTo(role.getId());
-        List<RolePrivilege> rolePrivilege = rolePrivilegeMapper.selectByExample(example);
-        List<Long> collect = rolePrivilege.stream().map(RolePrivilege::getPrivilegeId).collect(Collectors.toList());
-        PrivilegeExample privilegeExample = new PrivilegeExample();
-        privilegeExample.createCriteria().andIdIn(collect);
-        List<Privilege> privilegeList = privilegeMapper.selectByExample(privilegeExample);
-        vm.setRole(role);
-        vm.setPrivileges(privilegeList);
-        return vm;
+    public Role findById(long id) {
+//        RoleVM vm = new RoleVM();
+//        Role role = roleMapper.selectByPrimaryKey(id);
+//        RolePrivilegeExample example = new RolePrivilegeExample();
+//        example.createCriteria().andRoleIdEqualTo(role.getId());
+//        List<RolePrivilege> rolePrivilege = rolePrivilegeMapper.selectByExample(example);
+//        List<Long> collect = rolePrivilege.stream().map(RolePrivilege::getPrivilegeId).collect(Collectors.toList());
+//        PrivilegeExample privilegeExample = new PrivilegeExample();
+//        privilegeExample.createCriteria().andIdIn(collect);
+//        List<Privilege> privilegeList = privilegeMapper.selectByExample(privilegeExample);
+//        vm.setRole(role);
+//        vm.setPrivileges(privilegeList);
+        Role role = roleMapper.findRoleWithPrivile(id);
+        return role;
     }
 
     @Override
@@ -68,11 +70,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void saveOrUpdate(RoleVM roleVM) {
-        if (roleVM.getRole().getId()!=null){
-            roleMapper.updateByPrimaryKey(roleVM.getRole());
-            for (Privilege privilege:roleVM.getPrivileges()){
-            }
+    public void saveOrUpdate(Role role) {
+        if (role.getId()!=null){
+            roleMapper.updateByPrimaryKey(role);
+        }else {
+            roleMapper.insert(role);
         }
     }
 }

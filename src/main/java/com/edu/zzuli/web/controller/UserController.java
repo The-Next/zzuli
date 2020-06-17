@@ -28,6 +28,26 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @GetMapping("findAllEmployee")
+    public Message findAllEmployee(){
+        return MessageUtil.success(userService.findAllEmployee());
+    }
+
+    @GetMapping("auditing")
+    public Message auditing(long id){
+        User user = userService.selectUserById(id);
+        user.setStatus("启用");
+        userService.saveOrUpdate(user);
+        return MessageUtil.success("审核成功");
+    }
+
+    @GetMapping("refuseauditing")
+    public Message refuseauditing(long id){
+        User user =  userService.selectUserById(id);
+        user.setStatus("禁用");
+        userService.saveOrUpdate(user);
+        return MessageUtil.success("已拒绝审核");
+    }
     @GetMapping("getUser")
     public Message findAll(){
         List<User> list = userService.findAll();
