@@ -33,6 +33,14 @@ public class UserController {
         return MessageUtil.success(userService.findAllEmployee());
     }
 
+    @ApiOperation("根据姓名模糊查询")
+    @GetMapping("findUserNameLike")
+    public Message findUserNameLike(String name){
+        List<User> list = userService.findUserLike(name);
+        return MessageUtil.success(list);
+    }
+
+
     @GetMapping("auditing")
     public Message auditing(long id){
         User user = userService.selectUserById(id);

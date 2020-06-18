@@ -17,4 +17,6 @@ public interface ProductService {
     void deleteById(long id) throws ClassCastException;
     List<ProductExtend> findAllWithCategory();
     Product selectProductById(long id);
+
+    List<Product> findProductLike(String name);
 }

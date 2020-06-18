@@ -26,6 +26,11 @@ public class ProductController {
         ArrayList<Product> arrayList= (ArrayList<Product>) productService.findAll();
         return MessageUtil.success(arrayList);
     }
+    @ApiOperation("根据产品名模糊查询")
+    public Message findProductNameLike(String name){
+        List<Product> list = productService.findProductLike(name);
+        return MessageUtil.success(list);
+    }
 
     @GetMapping("/getProductById")
     public Message getProductById(Long id){

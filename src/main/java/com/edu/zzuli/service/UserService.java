@@ -22,4 +22,6 @@ public interface UserService {
     List<UserExtend> findAllWithRole();
 
     User selectUserById(Long id);
+
+    List<User> findUserLike(String name);
 }

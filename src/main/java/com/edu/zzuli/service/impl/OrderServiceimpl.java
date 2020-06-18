@@ -4,10 +4,7 @@ import com.edu.zzuli.dao.OrderLineMapper;
 import com.edu.zzuli.dao.OrderMapper;
 import com.edu.zzuli.dao.UserMapper;
 import com.edu.zzuli.dao.extend.OrderExtendMapper;
-import com.edu.zzuli.entity.Order;
-import com.edu.zzuli.entity.OrderExample;
-import com.edu.zzuli.entity.OrderLine;
-import com.edu.zzuli.entity.User;
+import com.edu.zzuli.entity.*;
 import com.edu.zzuli.entity.extend.OrderExtend;
 import com.edu.zzuli.service.OrderService;
 import com.edu.zzuli.utils.CustomerException;
@@ -158,4 +155,5 @@ public class OrderServiceimpl implements OrderService {
         order.setStatus(OrderExtend.STATUS_YWC);
         orderMapper.updateByPrimaryKey(order);
     }
+
 }

@@ -3,6 +3,7 @@ package com.edu.zzuli.service.impl;
 import com.edu.zzuli.dao.ProductMapper;
 import com.edu.zzuli.dao.extend.ProductExtendMapper;
 import com.edu.zzuli.entity.Product;
+import com.edu.zzuli.entity.ProductExample;
 import com.edu.zzuli.entity.extend.ProductExtend;
 import com.edu.zzuli.service.ProductService;
 import com.edu.zzuli.utils.CustomerException;
@@ -57,5 +58,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product selectProductById(long id) {
         return productMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Product> findProductLike(String name) {
+        ProductExample productExample = new ProductExample();
+        productExample.createCriteria().andNameLike("%"+name+"%");
+        return productMapper.selectByExample(productExample);
     }
 }

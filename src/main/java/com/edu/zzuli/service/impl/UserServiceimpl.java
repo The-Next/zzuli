@@ -3,6 +3,7 @@ package com.edu.zzuli.service.impl;
 import com.edu.zzuli.dao.UserMapper;
 import com.edu.zzuli.dao.extend.UserExtendMapper;
 import com.edu.zzuli.entity.User;
+import com.edu.zzuli.entity.UserExample;
 import com.edu.zzuli.entity.extend.UserExtend;
 import com.edu.zzuli.service.UserService;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Created by cccp
  */
 @Service
-public class UserServiceimpl implements UserService {
+class UerServiceimpl implements UserService {
     @Resource
     private UserMapper userMapper;
     @Resource
@@ -55,5 +56,12 @@ public class UserServiceimpl implements UserService {
     @Override
     public User selectUserById(Long id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<User> findUserLike(String name) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andRealnameLike("%"+name+"%");
+        return userMapper.selectByExample(userExample);
     }
 }

@@ -37,4 +37,5 @@ public interface OrderService {
     void rejectOrder(long orderId) throws Exception;//待确认
 
     void confirmOrder(long orderId) throws Exception;//结束
+
 }
